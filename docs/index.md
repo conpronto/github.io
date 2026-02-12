@@ -29,7 +29,7 @@ POST https://api.conpronto.com/api/v1/auth/token/
 
 ```json title="Body"
 {
-  "app_key": "prontoappkey-eluniverso-ABC123",
+  "app_key": "xxxxxxxxxxxx-xxxxxxx-xxxxxx",
   "token": "secrettokenvalue"
 }
 ```
