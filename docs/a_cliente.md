@@ -4,12 +4,12 @@
 
 ```json
 {
-  "id": 451503,
-  "identificacion": "1792233356001",
-  "nombre": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+  "id": 123445,
+  "identificacion": "099999999001",
+  "nombre": "NOMBRE CLIENTE",
   "apellido": "",
-  "razon_social": "WALKER SERVICIOS DE MARKETING S.A. WSM",
-  "nombre_comercial": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+  "razon_social": "NOMBRE CLIENTE",
+  "nombre_comercial": "NOMBRE CLIENTE",
   "direccion": "PICHINCHA / QUITO / SAN ISIDRO DEL INCA",
   "silenciado": false,
   "metadatos": {
@@ -82,12 +82,12 @@ Content-Type: application/json
   "previous": null,
   "results": [
     {
-      "id": 451503,
-      "identificacion": "1792233356001",
-      "nombre": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+      "id": 123445,
+      "identificacion": "099999999001",
+      "nombre": "NOMBRE CLIENTE",
       "apellido": "",
-      "razon_social": "WALKER SERVICIOS DE MARKETING S.A. WSM",
-      "nombre_comercial": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+      "razon_social": "NOMBRE CLIENTE",
+      "nombre_comercial": "NOMBRE CLIENTE",
       "direccion": "Quito",
       "silenciado": false,
       "metadatos": null
@@ -109,7 +109,7 @@ Content-Type: application/json
 
 ```json title="Body"
 {
-  "identificacion": "0999954599001",
+  "identificacion": "0999999999001",
   "nombre": "Andres",
   "apellido": "Lopez",
   "razon_social": null,
@@ -133,8 +133,8 @@ Reglas
 
 ```json title="Respuesta 201"
 {
-  "id": 451600,
-  "identificacion": "0999954599001",
+  "id": 12342,
+  "identificacion": "0999999999001",
   "nombre": "Andres",
   "apellido": "Lopez",
   "razon_social": null,
@@ -161,7 +161,7 @@ Content-Type: application/json
 
 ```json title="Body"
 {
-  "identificacion": "0999954599001",
+  "identificacion": "0999999999001",
   "nombre": "Andres",
   "apellido": "Lopez",
   "razon_social": null,

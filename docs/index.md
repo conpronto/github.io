@@ -84,12 +84,12 @@ Las siguientes son url's válidas para uso del api:
 
 ### Url's de contacto
 
-| URL                                               | Método |
-|---------------------------------------------------|--------|
-| `https://api.conpronto.com/api/v2/contacts/`      | GET    |
-| `https://api.conpronto.com/api/v2/contacts/<ID>/` | GET    |
-| `https://api.conpronto.com/api/v2/contacts/`      | POST   |
-| `https://api.conpronto.com/api/v2/contacts/<ID>/` | DELETE |
+| URL                                                       | Método |
+|-----------------------------------------------------------|--------|
+| `https://api.conpronto.com/api/v2/contacts/`              | GET    |
+| `https://api.conpronto.com/api/v2/contacts/<ID>/`         | GET    |
+| `https://api.conpronto.com/api/v2/contacts/`              | POST   |
+| `https://api.conpronto.com/api/v2/contacts/<ID_CLIENTE>/` | DELETE |
 
 ### Url's de documento
 
