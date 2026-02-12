@@ -83,7 +83,7 @@ Authorization: Bearer <access_token>
 ---
 
 ```bash
-GET https://app.conpronto.com/api/v2/contacts/?p=1&page_size=25&id_cliente=<ID_CLIENTE>
+GET https://app.conpronto.com/api/v1/contacts/?p=1&page_size=25&id_cliente=<ID_CLIENTE>
 ```
 
 ### Respuesta
@@ -102,7 +102,7 @@ La respuesta es paginada y contiene:
   "previous": null,
   "results": [
     {
-      "id": 1224,
+      "id_contacto": 1224,
       "id_cliente": 4321,
       "nombre": "Andrés",
       "apellido": "Lopez",
@@ -111,7 +111,7 @@ La respuesta es paginada y contiene:
       "tipo_contacto_email": "TO"
     },
     {
-      "id": 1225,
+      "id_contacto": 1225,
       "id_cliente": 4321,
       "nombre": "Juan",
       "apellido": "Lopez",
@@ -123,49 +123,11 @@ La respuesta es paginada y contiene:
 }
 ```
 
-## Obtener un Contacto (GET)
-
-Permite obtener la información de un contacto específico.
-
-`GET https://app.conpronto.com/api/v2/contacts/{id}/`
-
-Headers
-
-`Authorization: Bearer <access_token>`
-
-### Parámetros
-
-| Parámetro | Tipo    | Descripción                      |
-|-----------|---------|----------------------------------|
-| id        | integer | Identificador único del contacto |
-
----
-
-### Ejemplo
-
-`GET https://app.conpronto.com/api/v2/contacts/<ID_CONTACTO>/`
-
----
-
-### Respuesta
-
-```json
-{
-  "id_contacto": 231,
-  "id_cliente": 321,
-  "nombre": "Andrés",
-  "apellido": "López",
-  "movil": "+593942985587",
-  "correo_electronico": "alopez@gmail.com",
-  "tipo_contacto_email": "TO"
-}
-```
-
 ## Crear Contactos (POST)
 
 Este servicio permite registrar uno o varios contactos asociados a un cliente en una sola solicitud.
 
-`POST https: //api.conpronto.com/api/v2/contacts/`
+`POST https: //api.conpronto.com/api/v1/contacts/`
 
 Por medio del método POST enviando en el cuerpo del requerimiento los datos del contacto.
 Headers
@@ -255,7 +217,7 @@ Este servicio permite eliminar todos los contactos asociados a un cliente espec�
 
 El ID que se envía en la URL corresponde al **ID del cliente**, no al ID del contacto.
 
-`DELETE http://app.conpronto.com/api/v2/contacts/<ID_CLIENTE>/`
+`DELETE http://app.conpronto.com/api/v1/contacts/<ID_CLIENTE>/`
 
 Headers
 
@@ -274,7 +236,7 @@ Authorization: Bearer <access_token>
 
 ---
 
-### Respuesta Exitosa
+### Respuesta
 
 ```bash
 204 No Content
@@ -284,7 +246,7 @@ No retorna cuerpo en la respuesta.
 
 ---
 
-### Códigos de Respuesta
+## Códigos de Respuesta
 
 | Código | Descripción                        |
 |--------|------------------------------------|

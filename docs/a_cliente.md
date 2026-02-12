@@ -37,7 +37,7 @@ Atributos del objeto Cliente
 ## Obtener un Cliente (GET)
 
 ```bash title="URL"
-GET https://app.conpronto.com/api/v2/customers/{id}/
+GET https://app.conpronto.com/api/v1/customers/{id}/
 ```
 
 ```bash title="Headers"
@@ -53,7 +53,7 @@ Respuesta 200
 Permite obtener el listado de clientes asociados al partner autenticado.
 
 ```bash title="URL"
-GET https://app.conpronto.com/api/v2/customers/
+GET https://app.conpronto.com/api/v1/customers/
 ```
 
 ```bash title="Headers"
@@ -73,12 +73,12 @@ Content-Type: application/json
 
 ---
 
-### Ejemplo con paginación
+### Respuesta
 
 ```json title="Respuesta paginada"
 {
   "count": 713,
-  "next": "https://app.conpronto.com/api/v2/customers/?p=2&page_size=50",
+  "next": "https://app.conpronto.com/api/v1/customers/?p=2&page_size=50",
   "previous": null,
   "results": [
     {
@@ -99,13 +99,15 @@ Content-Type: application/json
 ## Crear Cliente (POST)
 
 ```bash title="URL"
-POST https://app.conpronto.com/api/v2/customers/
+POST https://app.conpronto.com/api/v1/customers/
 ```
 
 ```bash title="Headers"
 Authorization: Bearer <access_token>
 Content-Type: application/json
 ```
+
+### Estructura del JSON
 
 ```json title="Body"
 {
@@ -123,13 +125,15 @@ Content-Type: application/json
 }
 ```
 
-Reglas
+### Comportamiento
 
 - No pueden existir dos clientes con la misma identificación dentro del mismo partner.
 - Para persona natural se usa nombre y apellido.
 - Para empresa se usa razon_social y nombre_comercial.
 - metadatos es opcional.
 - silenciado es opcional (por defecto false).
+
+### Respuesta
 
 ```json title="Respuesta 201"
 {
@@ -151,13 +155,15 @@ Reglas
 ## Modificar Cliente (PUT)
 
 ```bash title="URL"
-PUT https://app.conpronto.com/api/v2/customers/{id}/
+PUT https://app.conpronto.com/api/v1/customers/{id}/
 ```
 
 ```bash title="Headers"
 Authorization: Bearer <access_token>
 Content-Type: application/json
 ```
+
+### Estructura del JSON
 
 ```json title="Body"
 {
@@ -175,20 +181,24 @@ Content-Type: application/json
 }
 ```
 
-Reglas
+### Comportamiento
 
 - Solo se actualizan los campos enviados.
 - Si se envía metadatos reemplaza completamente el objeto anterior.
 - El cliente debe pertenecer al partner autenticado.
 
-Respuesta 200:
+### Respuesta
 
 [Devuelve el objeto Cliente.](#objeto-cliente)
+
+```bash title="Respuesta"
+201 Created
+```
 
 ## Eliminar Cliente (DELETE)
 
 ```bash title="URL"
-DELETE https://app.conpronto.com/api/v2/customers/{id}/
+DELETE https://app.conpronto.com/api/v1/customers/{id}/
 ```
 
 ```bash title="Headers"
@@ -196,14 +206,25 @@ Authorization: Bearer <access_token>
 Content-Type: application/json
 ```
 
-```bash title="Respuesta"
-204 Not Content
-```
-
-Consideraciones
+### Comportamiento
 
 - No se podrá eliminar si el cliente tiene:
 - Documentos asociados
 - Pagos asociados
 - Contactos asociados
 - En caso de tener dependencias, se retornará error 400.
+
+### Respuesta
+
+```bash title="Respuesta"
+204 Not Content
+```
+
+## Códigos de Respuesta
+
+| Código | Descripción                        |
+|--------|------------------------------------|
+| 204    | Contactos eliminados correctamente |
+| 400    | Cliente no existe                  |
+| 401    | Token inválido o expirado          |
+| 403    | Sin permisos                       |

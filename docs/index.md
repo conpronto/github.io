@@ -65,8 +65,10 @@ llamada fue exitosa o fallida.
 | `201`  | [Created](https://datatracker.ietf.org/doc/html/rfc7231#section-6.3.2)             | Creado. La llamada fue exitosa y un nuevo objeto o grupo de objetos fue creado                                                                                                                            |
 | `401`  | [Unauthorized](https://datatracker.ietf.org/doc/html/rfc7235#section-3.1)          | El token JWT es inválido, expirado o no fue enviado en el encabezado Authorization.                                                                                                                       |
 | `404`  | [Not Found](https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4)           | No encontrado. Según la API Key indicada en el Header, el recurso no existe. Esto también puede indicar que no tienes permitido realizar este tipo de llamada.                                            |
-| `422`  | [Unprocessable Entity](https://datatracker.ietf.org/doc/html/rfc2518#section-10.3) | No Procesable. La solicitud está correctamente estructurada, pero presenta errores en cuanto a su significado. Es posible que hayas omitido campos obligatorios o incluido campos que no son pertinentes. |
-| `429`  | [Too Many Requests](https://datatracker.ietf.org/doc/html/rfc6585#section-4)       | Demasiadas solicitudes. Llamaste muchas veces seguidas a la API.                                                                                                                                          |
+
+[//]: # (| `422`  | [Unprocessable Entity]&#40;https://datatracker.ietf.org/doc/html/rfc2518#section-10.3&#41; | No Procesable. La solicitud está correctamente estructurada, pero presenta errores en cuanto a su significado. Es posible que hayas omitido campos obligatorios o incluido campos que no son pertinentes. |)
+
+[//]: # (| `429`  | [Too Many Requests]&#40;https://datatracker.ietf.org/doc/html/rfc6585#section-4&#41;       | Demasiadas solicitudes. Llamaste muchas veces seguidas a la API.                                                                                                                                          |)
 
 ## URL's
 
@@ -76,20 +78,20 @@ Las siguientes son url's válidas para uso del api:
 
 | URL                                                | Método |
 |----------------------------------------------------|--------|
-| `https://api.conpronto.com/api/v2/customers/`      | GET    |
-| `https://api.conpronto.com/api/v2/customers/<ID>/` | GET    |
-| `https://api.conpronto.com/api/v2/customers/`      | POST   |
-| `https://api.conpronto.com/api/v2/customers/<ID>/` | PUT    |
-| `https://api.conpronto.com/api/v2/customers/<ID>/` | DELETE |
+| `https://api.conpronto.com/api/v1/customers/`      | GET    |
+| `https://api.conpronto.com/api/v1/customers/<ID>/` | GET    |
+| `https://api.conpronto.com/api/v1/customers/`      | POST   |
+| `https://api.conpronto.com/api/v1/customers/<ID>/` | PUT    |
+| `https://api.conpronto.com/api/v1/customers/<ID>/` | DELETE |
 
 ### Url's de contacto
 
 | URL                                                       | Método |
 |-----------------------------------------------------------|--------|
-| `https://api.conpronto.com/api/v2/contacts/`              | GET    |
-| `https://api.conpronto.com/api/v2/contacts/<ID>/`         | GET    |
-| `https://api.conpronto.com/api/v2/contacts/`              | POST   |
-| `https://api.conpronto.com/api/v2/contacts/<ID_CLIENTE>/` | DELETE |
+| `https://api.conpronto.com/api/v1/contacts/`              | GET    |
+| `https://api.conpronto.com/api/v1/contacts/<ID>/`         | GET    |
+| `https://api.conpronto.com/api/v1/contacts/`              | POST   |
+| `https://api.conpronto.com/api/v1/contacts/<ID_CLIENTE>/` | DELETE |
 
 ### Url's de documento
 
@@ -108,28 +110,3 @@ Las siguientes son url's válidas para uso del api:
 | `https://api.conpronto.com/documento/<ID>/cobro/`                                               | GET    |
 | `GET https://api.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
 | `https://api.conpronto.com/cobro/<PASARELA>/`                                                   | GET    |
-
-### Url's de retención
-
-| URL                                                                                             | Método |
-|-------------------------------------------------------------------------------------------------|--------|
-| `https://api.conpronto.com/retencion/`                                                          | POST   |
-| `https://api.conpronto.com/retencion/`                                                          | PUT    |
-| `https://api.conpronto.com/retencion/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
-| `https://api.conpronto.com/retencion/`                                                          | GET    |
-
-### Url's de notificación
-
-| URL                                                                                                | Método |
-|----------------------------------------------------------------------------------------------------|--------|
-| `https://api.conpronto.com/notificacion/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
-| `https://api.conpronto.com/cliente/<ID>/notificacion/`                                             | GET    |
-
-### Url's de suscripción
-
-| URL                                                   | Método |
-|-------------------------------------------------------|--------|
-| `https://api.conpronto.com/cliente/<ID>/suscripcion/` | POST   |
-| `https://api.conpronto.com/suscripcion/`              | PUT    |
-| `https://api.conpronto.com/suscripcion/<ID>/`         | GET    |
-| `https://api.conpronto.com/cliente/<ID>/suscripcion/` | GET    |
