@@ -1,230 +1,209 @@
 # Cliente
+
 ## Objeto Cliente
 
-``` json title="Objeto Cliente:"
-[
-    {
-        "id": "1234",
-        "fecha_modificacion": "21/06/2023",
-        "razon_social": null,
-        "nombre_comercial": null,
-        "nombre": "Andres",
-        "apellido": "Lopez",
-        "tipo_identificacion": "1",
-        "identificacion": "0999999999",
-        "tipo_persona": "1",
-        "direccion": "Guayaquil",
-    	"contactos":
-		[{
-            "id": "113",
-    	    "nombre": "Andres",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942985587",
-    	    "email ": "alopez@gmail.com"
-    	},
-		{
-            "id": "115",
-    	    "nombre": "Juan",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942952487",
-    	    "email ": "jlopez@gmail.com"
-    	}],
-}]
-```
-Atributos del objeto Cliente.
-
-Los tipos de identificación son:
-
-| Valor       | Tipo                                 |
-| ----------- | ------------------------------------ |
-| `1 `       | Cédula                               |
-| `2 `       | Ruc|
-| `3 `       | Pasaporte |
-
-Los tipos de persona son:
-
-| Valor       | Tipo                                 |
-| ----------- | ------------------------------------ |
-| `1 `       | Persona                            |
-| `2 `       | Empresa|
-
-| Parámetro   | Tipo    | Longitud | Descripción |
-| ----------- | ------- | -------- | ----------- |
-| `id`|varchar|10|Identificador del cliente en el sistema|
-| `fecha_modificacion`|date||Última fecha en la que se modificó el cliente|
-| `razon_social`|varchar|200|Razón social del cliente tipo empresa|
-| `nombre_comercial `|varchar|200|Nombre comercial del cliente tipo empresa|
-| `nombre`|varchar|200|Nombre cliente tipo persona|
-| `apellido`|varchar|200|Apellido cliente tipo persona|
-| `tipo_identificacion`|varchar|1|Tipo de identificación del cliente|
-| `identificacion`|varchar|15|Número de cédula o ruc del cliente|
-| `tipo_persona`|varchar|1|Tipo de persona del cliente (Persona o Empresa)|
-| `direccion`|varchar|200|Dirección del cliente|
-| `contacto`|objeto|-|Si|Objeto contenedor del contacto del cliente|
-
-
-## Crear Cliente (POST)
-
-Para crear un cliente se debe de hacer uso de la url:
-
-`POST https://api.conpronto.com/cliente/`
-
-Por medio del método POST enviando en el cuerpo del requerimiento los datos del cliente:
-
-``` json title="Estructura del JSON:"
+```json
 {
-    	"razon_social": "Andres Lopez",
-    	"nombre_comercial": "Andres Lopez",
-    	"nombre": null,
-    	"apellido": null,
-    	"tipo_identificacion": "2",
-    	"identificacion": "0999954599001",
-    	"tipo_persona": "2",
-    	"direccion": "Guayaquil",
-    	"contactos": 
-		[{
-    	   "nombre": "Andres",
-    	   "apellido": "Lopez",
-    	   "movil": "+593942985587",
-    	   "email": "alopez@gmail.com"
-    	}]
+  "id": 451503,
+  "identificacion": "1792233356001",
+  "nombre": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+  "apellido": "",
+  "razon_social": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+  "nombre_comercial": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+  "direccion": "PICHINCHA / QUITO / SAN ISIDRO DEL INCA",
+  "silenciado": false,
+  "metadatos": {
+    "segmento": "corporativo",
+    "zona": "norte"
+  }
 }
 ```
-*NOTA:
 
-:bangbang: En el caso de que se registre un cliente de tipo “Persona”, los parámetros razon_social y nombre_comercial no son obligatorios. Así mismo, en el caso de que se registre un cliente de tipo “Empresa”, los parámetros nombre y apellido no son obligatorios.
+Atributos del objeto Cliente
+----------------------------------------------------------------
 
-## Modificar Cliente (PUT)
-
-Para modificar un cliente se debe de hacer uso de la url:
-
-`PUT https://api.conpronto.com/cliente/`
-
-Por medio del método PUT enviando en el cuerpo del requerimiento los datos del cliente.
-
-``` json title="Estructura del JSON:"
-{
-        "id": "1235",
-        "razon_social": null,
-        "nombre_comercial": null,
-        "nombre": "Andres",
-        "apellido": "Lopez",
-        "tipo_identificacion": "1",
-        "identificacion": "0999999999",
-        "tipo_persona": "1",
-        "direccion": "Guayaquil",
-    	"contactos": 
-		[{
-    	    "nombre": "Andrés",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942985587",
-    	    "email ": "alopez@gmail.com"
-    	}],
-}
-``` 
-*NOTA :material-information-outline:{ title="Nota" }:
-
-:bangbang: En el caso de modificar un cliente de tipo “Persona”, los parámetros razon_social y nombre_comercial no son obligatorios. Así mismo, en el caso de modificar un cliente de tipo “Empresa”, los parámetros nombre y apellido no son obligatorios.
+| Parámetro        | Tipo    | Descripción                                        
+|------------------|---------|----------------------------------------------------
+| id               | integer | Identificador interno del cliente                  
+| identificacion   | string  | Cédula o RUC del cliente                           
+| nombre           | string  | Nombre (persona natural)                           
+| apellido         | string  | Apellido (persona natural)                         
+| razon_social     | string  | Razón social (empresa)                             
+| nombre_comercial | string  | Nombre comercial (empresa)                         
+| direccion        | string  | Dirección del cliente                              
+| silenciado       | boolean | Indica si el cliente está silenciado               
+| metadatos        | object  | Objeto JSON con información adicional estructurada 
 
 ## Obtener un Cliente (GET)
 
-Para obtener un cliente se debe de hacer uso de la url:
+```bash title="URL"
+GET https://app.conpronto.com/api/v2/customers/{id}/
+```
 
-`GET https://api.conpronto.com/cliente/<ID>/`
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
 
-Devuelve un cliente con el <ID> solicitado.
+Respuesta 200
+[Devuelve el objeto Cliente.](#objeto-cliente)
 
-``` json title="Respuesta al consultar un cliente:"
-[
+## Obtener listado de Clientes (GET)
+
+Permite obtener el listado de clientes asociados al partner autenticado.
+
+```bash title="URL"
+GET https://app.conpronto.com/api/v2/customers/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+---
+
+### Parámetros de Consulta (Opcionales)
+
+| Parámetro | Tipo    | Descripción                                                            |
+|-----------|---------|------------------------------------------------------------------------|
+| p         | integer | Número de página                                                       |
+| page_size | integer | Cantidad de registros por página                                       |
+| search    | string  | Permite buscar por nombre, apellido, identificación o nombre comercial |
+
+---
+
+### Ejemplo con paginación
+
+```json title="Respuesta paginada"
+{
+  "count": 713,
+  "next": "https://app.conpronto.com/api/v2/customers/?p=2&page_size=50",
+  "previous": null,
+  "results": [
     {
-        "id": "1234",
-        "fecha_modificacion": "21/06/2023",
-        "razon_social": null,
-        "nombre_comercial": null,
-        "nombre": "Andres",
-        "apellido": "Lopez",
-        "tipo_identificacion": "1",
-        "identificacion": "0999999999",
-        "tipo_persona": "1",
-        "direccion": "Guayaquil",
-		"contactos":
-		[{
-            "id": "113",
-    	    "nombre": "Andres",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942985587",
-    	    "email ": "alopez@gmail.com"
-    	},
-		{
-            "id": "115",
-    	    "nombre": "Juan",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942952487",
-    	    "email ": "jlopez@gmail.com"
-    	}],
-}]
+      "id": 451503,
+      "identificacion": "1792233356001",
+      "nombre": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+      "apellido": "",
+      "razon_social": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+      "nombre_comercial": "WALKER SERVICIOS DE MARKETING S.A. WSM",
+      "direccion": "Quito",
+      "silenciado": false,
+      "metadatos": null
+    }
+  ]
+}
 ```
 
-## Obtener un listado de Clientes (GET)
+## Crear Cliente (POST)
 
-Para obtener un listado de todos los clientes creados en el sistema se debe de hacer uso de la url:
-
-`GET https://api.conpronto.com/cliente/`
-
-``` json title="Respuesta al consultar todos los clientes:"
-[
-	{
-       "id": "4568",
-       "fecha_modificacion": "21/06/2023",
-       "razon_social": null,
-       "nombre_comercial": null,
-       "nombre": "Andres",
-       "apellido": "Lopez",
-       "tipo_identificacion": "1",
-       "identificacion": "0999999999",
-       "tipo_persona": "1",
-       "direccion": "Guayaquil",
-	   "contactos":
-		[{
-            "id": "113",
-    	    "nombre": "Andres",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942985587",
-    	    "email ": "alopez@gmail.com"
-    	},
-		{
-            "id": "115",
-    	    "nombre": "Juan",
-    	    "apellido": "Lopez",
-    	    "movil": "+593942952487",
-    	    "email ": "jlopez@gmail.com"
-    	}],
- },
- {
-       "id": "4956",
-       "fecha_modificacion": "21/06/2023",
-       "razon_social": "Pladsu S.A",
-       "nombre_comercial": "Pronto",
-       "nombre": null,
-       "apellido": null,
-       "tipo_identificacion": "2",
-       "identificacion": "0999999945001",
-       "tipo_persona": "2",
-       "direccion": "Guayaquil",
-		"contactos":
-		[{
-            "id": "123",
-    	    "nombre": "Pronto",
-    	    "apellido": "Cobranzas",
-    	    "movil": "+593942985587",
-    	    "email ": "cobranzas@gmail.com"
-    	},
-		{
-            "id": "125",
-    	    "nombre": "Pronto",
-    	    "apellido": "ADministración",
-    	    "movil": "+593942952487",
-    	    "email ": "administracion@gmail.com"
-    	}],	
- },...
+```bash title="URL"
+POST https://app.conpronto.com/api/v2/customers/
 ```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+```json title="Body"
+{
+  "identificacion": "0999954599001",
+  "nombre": "Andres",
+  "apellido": "Lopez",
+  "razon_social": null,
+  "nombre_comercial": null,
+  "direccion": "Guayaquil",
+  "silenciado": false,
+  "metadatos": {
+    "segmento": "retail",
+    "origen": "landing_web"
+  }
+}
+```
+
+Reglas
+
+- No pueden existir dos clientes con la misma identificación dentro del mismo partner.
+- Para persona natural se usa nombre y apellido.
+- Para empresa se usa razon_social y nombre_comercial.
+- metadatos es opcional.
+- silenciado es opcional (por defecto false).
+
+```json title="Respuesta 201"
+{
+  "id": 451600,
+  "identificacion": "0999954599001",
+  "nombre": "Andres",
+  "apellido": "Lopez",
+  "razon_social": null,
+  "nombre_comercial": null,
+  "direccion": "Guayaquil",
+  "silenciado": false,
+  "metadatos": {
+    "segmento": "retail",
+    "origen": "landing_web"
+  }
+}
+```
+
+## Modificar Cliente (PUT)
+
+```bash title="URL"
+PUT https://app.conpronto.com/api/v2/customers/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+```json title="Body"
+{
+  "identificacion": "0999954599001",
+  "nombre": "Andres",
+  "apellido": "Lopez",
+  "razon_social": null,
+  "nombre_comercial": null,
+  "direccion": "Guayaquil",
+  "silenciado": false,
+  "metadatos": {
+    "segmento": "retail",
+    "origen": "landing_web"
+  }
+}
+```
+
+Reglas
+
+- Solo se actualizan los campos enviados.
+- Si se envía metadatos reemplaza completamente el objeto anterior.
+- El cliente debe pertenecer al partner autenticado.
+
+Respuesta 200:
+
+[Devuelve el objeto Cliente.](#objeto-cliente)
+
+## Eliminar Cliente (DELETE)
+
+```bash title="URL"
+DELETE https://app.conpronto.com/api/v2/customers/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+```bash title="Respuesta"
+204 Not Content
+```
+
+Consideraciones
+
+- No se podrá eliminar si el cliente tiene:
+- Documentos asociados
+- Pagos asociados
+- Contactos asociados
+- En caso de tener dependencias, se retornará error 400.
