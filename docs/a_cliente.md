@@ -15,24 +15,57 @@
   "metadatos": {
     "segmento": "corporativo",
     "zona": "norte"
-  }
+  },
+  "contactos": [
+    {
+      "id_contacto": 12345,
+      "id_cliente": 12345,
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": "prueba@mail.com",
+      "tipo_contacto_email": "TO"
+    },
+    {
+      "id_contacto": 12346,
+      "id_cliente": 12345,
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": null,
+      "tipo_contacto_email": "CC"
+    }
+  ]
 }
 ```
 
-Atributos del objeto Cliente
+### Atributos del objeto Cliente
 ----------------------------------------------------------------
 
-| Parámetro        | Tipo    | Descripción                                        
-|------------------|---------|----------------------------------------------------
-| id               | integer | Identificador interno del cliente                  
-| identificacion   | string  | Cédula o RUC del cliente                           
-| nombre           | string  | Nombre (persona natural)                           
-| apellido         | string  | Apellido (persona natural)                         
-| razon_social     | string  | Razón social (empresa)                             
-| nombre_comercial | string  | Nombre comercial (empresa)                         
-| direccion        | string  | Dirección del cliente                              
-| silenciado       | boolean | Indica si el cliente está silenciado               
-| metadatos        | object  | Objeto JSON con información adicional estructurada 
+| Parámetro        | Tipo    | Longitud | Descripción                                                     |
+|------------------|---------|----------|-----------------------------------------------------------------|
+| id               | int     |          | Identificador interno del cliente                               |
+| identificacion   | varchar | 25       | Cédula o RUC del cliente                                        |
+| nombre           | varchar | 300      | Nombre (persona natural)                                        |
+| apellido         | varchar | 300      | Apellido (persona natural)                                      |
+| razon_social     | varchar | 300      | Razón social (empresa)                                          |
+| nombre_comercial | varchar | 300      | Nombre comercial (empresa)                                      |
+| direccion        | varchar | 300      | Dirección del cliente                                           |
+| silenciado       | boolean |          | Indica si el cliente está silenciado                            |
+| metadatos        | object  |          | Objeto JSON con información adicional estructurada              |
+| contactos        | list    |          | Lista de [objectos de contacto](#atributos-del-objeto-contacto) |                      
+
+#### Atributos del objeto contacto
+
+| Parámetro             | Tipo    | Longitud | Obligatorio | Descripción                                                   |
+|-----------------------|---------|----------|-------------|---------------------------------------------------------------|
+| `id_contacto`         | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
+| `id_cliente`          | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
+| `nombre`              | varchar | 300      | Si          | Nombre del contacto                                           |
+| `apellido`            | varchar | 300      | No          | Apellido del contacto                                         |
+| `movil`               | varchar | 30       | Si          | Móvil del contacto                                            |
+| `correo_electronico`  | varchar | 254      | Si          | Email del contacto                                            |
+| `tipo_contacto_email` | varchar | 2        | No          | Tipo de contacto: TO o CC                                     |
 
 ## Obtener un Cliente (GET)
 
@@ -121,7 +154,23 @@ Content-Type: application/json
   "metadatos": {
     "segmento": "retail",
     "origen": "landing_web"
-  }
+  },
+  "contactos": [
+    {
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": "prueba@mail.com",
+      "tipo_contacto_email": "TO"
+    },
+    {
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": null,
+      "tipo_contacto_email": "CC"
+    }
+  ]
 }
 ```
 
@@ -148,7 +197,27 @@ Content-Type: application/json
   "metadatos": {
     "segmento": "retail",
     "origen": "landing_web"
-  }
+  },
+  "contactos": [
+    {
+      "id_contacto": 12345,
+      "id_cliente": 12345,
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": null,
+      "tipo_contacto_email": "TO"
+    },
+    {
+      "id_contacto": 12346,
+      "id_cliente": 12345,
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": null,
+      "tipo_contacto_email": "CC"
+    }
+  ]
 }
 ```
 
@@ -177,7 +246,23 @@ Content-Type: application/json
   "metadatos": {
     "segmento": "retail",
     "origen": "landing_web"
-  }
+  },
+  "contactos": [
+    {
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": "prueba@mail.com",
+      "tipo_contacto_email": "TO"
+    },
+    {
+      "nombre": "PRUEBA",
+      "apellido": "",
+      "movil": "+593999999999",
+      "correo_electronico": null,
+      "tipo_contacto_email": "CC"
+    }
+  ]
 }
 ```
 
@@ -186,6 +271,8 @@ Content-Type: application/json
 - Solo se actualizan los campos enviados.
 - Si se envía metadatos reemplaza completamente el objeto anterior.
 - El cliente debe pertenecer al partner autenticado.
+- Nota: Si no se pasa el arreglo de contactos se mantendrá los contactos existentes y en caso de pasar el arrelgo de
+  contactos, eliminará los contactos existentes y agregará los nuevos contactos
 
 ### Respuesta
 

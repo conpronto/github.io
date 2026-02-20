@@ -50,7 +50,7 @@ Los tipos de pasarela de pagos soportados para pago con tarjeta son:
 
 Para crear un cobro se debe de hacer uso de la url:
 
-`POST https://api.conpronto.com/documento/<ID>/cobro/`
+`POST https://app.conpronto.com/documento/<ID>/cobro/`
 
 Cambiando el parámetro por el id del documento (devuelto al momento de crear el documento).
 
@@ -74,7 +74,7 @@ Cambiando el parámetro por el id del documento (devuelto al momento de crear el
 
 Podemos consultar los cobros que tiene un documento por medio de la url:
 
-`GET https://api.conpronto.com/documento/<ID>/cobro/`
+`GET https://app.conpronto.com/documento/<ID>/cobro/`
 
 Usando el id devuelto en la creación de documento.
 
@@ -95,11 +95,11 @@ Usando el id devuelto en la creación de documento.
 ``` 
 ## Obtener Cobros por un rango de fechas (GET)
 
-`GET https://api.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
+`GET https://app.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
 
 Ejemplo:
 
-`GET https://api.conpronto.com/cobro/?fecha_inicial=1/02/2023&fecha_final=28/02/2023`
+`GET https://app.conpronto.com/cobro/?fecha_inicial=1/02/2023&fecha_final=28/02/2023`
 
 ``` json title="Respuesta al consultar los cobros:"
 [
@@ -130,7 +130,7 @@ Ejemplo:
 
 Podemos consultar los cobros realizados por Datafast o Payphone por medio de la url:
 
-`GET https://api.conpronto.com/cobro/<PASARELA>/`
+`GET https://app.conpronto.com/cobro/<PASARELA>/`
 
 Usando el código de la pasarela de pago en la creación del cobro.
 

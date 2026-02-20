@@ -66,7 +66,7 @@ Atributos del objeto Documento:
 
 Para crear un documento se debe de hacer uso de la url:
 
-`POST https://api.conpronto.com/documento/`
+`POST https://app.conpronto.com/documento/`
 
 Por medio del método POST enviando en el cuerpo del requerimiento los datos del documento.
 
@@ -105,7 +105,7 @@ Este servicio permite modificar un documento creado por API.
 
 Para modificar un documento se debe hacer uso de la url:
 
-`PUT https://api.conpronto.com/documento/`
+`PUT https://app.conpronto.com/documento/`
 
 Los datos que se envían al momento de la actualización son los mismos que al momento de la creación aumentando el parámetro "id" dentro del json.
 
@@ -144,7 +144,7 @@ Los datos que se envían al momento de la actualización son los mismos que al m
 
 Para obtener un documento se debe de hacer uso de la url:
 
-`GET https://api.conpronto.com/documento/<ID>`
+`GET https://app.conpronto.com/documento/<ID>`
 
 Devuelve un documento con el <ID> solicitado.
 
@@ -186,11 +186,11 @@ Respuesta al consultar un documento:
 
 Para obtener los documentos de un rango de fechas determinado hacemos uso del endpoint:
 
-`GET https://api.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
+`GET https://app.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
 
 Ejemplo:
 
-`GET https://api.conpronto.com/documento/?fecha_inicial=1/02/2023&fecha_final=28/02/2023/`
+`GET https://app.conpronto.com/documento/?fecha_inicial=1/02/2023&fecha_final=28/02/2023/`
 
 ``` json title="Respuesta al consultar todos los documentos:"
 [{ 

@@ -27,15 +27,15 @@
 
 Atributos del objeto contacto:
 
-| Parámetro             | Tipo    | Longitud | Obligatorio | Descripción                                                   |
-|-----------------------|---------|----------|-------------|---------------------------------------------------------------|
-| `id_contacto`         | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
-| `id_cliente`          | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
-| `nombre`              | varchar | 200      | Si          | Nombre del contacto                                           |
-| `apellido`            | varchar | 200      | Si          | Apellido del contacto                                         |
-| `movil`               | varchar | 20       | Si          | Móvil del contacto                                            |
-| `email`               | varchar | 200      | Si          | Email del contacto                                            |
-| `tipo_contacto_email` | varchar | 3        | No          | Tipo de contacto: TO o CC                                     |
+| Parámetro              | Tipo    | Longitud | Obligatorio | Descripción                                                   |
+|------------------------|---------|----------|-------------|---------------------------------------------------------------|
+| `id_contacto`          | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
+| `id_cliente`           | int     |          | Si          | Identificador del cliente al que se desea agregar un contacto |
+| `nombre`               | varchar | 300      | Si          | Nombre del contacto                                           |
+| `apellido`             | varchar | 300      | No          | Apellido del contacto                                         |
+| `movil`                | varchar | 30       | Si          | Móvil del contacto                                            |
+| `correo_electronico`   | varchar | 254      | Si          | Email del contacto                                            |
+| `tipo_contacto_email`  | varchar | 2        | No          | Tipo de contacto: TO o CC                                     |
 
 Reglas Funcionales
 
@@ -57,7 +57,7 @@ Reglas Funcionales
 Permite obtener el listado de contactos registrados.
 
 ```bash
-GET https://api.conpronto.com/contacts/
+GET https://app.conpronto.com/contacts/
 ```
 
 Headers

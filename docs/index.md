@@ -6,7 +6,7 @@ A continuación, encontrarás toda la documentación necesaria para integrarse a
 Programming Interface).
 
 ```html title="Url Base:"
-https://api.conpronto.com/
+https://app.conpronto.com/
 ```
 
 ## Autenticación
@@ -25,7 +25,7 @@ Para consumir los endpoints es necesario:
 
 ### Obtener Access Token
 
-POST https://api.conpronto.com/api/v1/auth/token/
+POST https://app.conpronto.com/api/v1/auth/token/
 
 ```json title="Body"
 {
@@ -78,35 +78,34 @@ Las siguientes son url's válidas para uso del api:
 
 | URL                                                | Método |
 |----------------------------------------------------|--------|
-| `https://api.conpronto.com/api/v1/customers/`      | GET    |
-| `https://api.conpronto.com/api/v1/customers/<ID>/` | GET    |
-| `https://api.conpronto.com/api/v1/customers/`      | POST   |
-| `https://api.conpronto.com/api/v1/customers/<ID>/` | PUT    |
-| `https://api.conpronto.com/api/v1/customers/<ID>/` | DELETE |
+| `https://app.conpronto.com/api/v1/customers/`      | GET    |
+| `https://app.conpronto.com/api/v1/customers/<ID>/` | GET    |
+| `https://app.conpronto.com/api/v1/customers/`      | POST   |
+| `https://app.conpronto.com/api/v1/customers/<ID>/` | PUT    |
+| `https://app.conpronto.com/api/v1/customers/<ID>/` | DELETE |
 
 ### Url's de contacto
 
-| URL                                                       | Método |
-|-----------------------------------------------------------|--------|
-| `https://api.conpronto.com/api/v1/contacts/`              | GET    |
-| `https://api.conpronto.com/api/v1/contacts/<ID>/`         | GET    |
-| `https://api.conpronto.com/api/v1/contacts/`              | POST   |
-| `https://api.conpronto.com/api/v1/contacts/<ID_CLIENTE>/` | DELETE |
+| URL                                                                 | Método |
+|---------------------------------------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/contacts/`                        | GET    |
+| `https://app.conpronto.com/api/v1/contacts/`                        | POST   |
+| `https://app.conpronto.com/api/v1/customers/<ID_CLIENTE>/contacts/` | DELETE |
 
 ### Url's de documento
 
 | URL                                                                                             | Método |
 |-------------------------------------------------------------------------------------------------|--------|
-| `https://api.conpronto.com/documento/`                                                          | POST   |
-| `https://api.conpronto.com/documento/`                                                          | PUT    |
-| `https://api.conpronto.com/documento/<ID>/`                                                     | GET    |
-| `https://api.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
+| `https://app.conpronto.com/documento/`                                                          | POST   |
+| `https://app.conpronto.com/documento/`                                                          | PUT    |
+| `https://app.conpronto.com/documento/<ID>/`                                                     | GET    |
+| `https://app.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
 
 ### Url's de cobro
 
 | URL                                                                                             | Método |
 |-------------------------------------------------------------------------------------------------|--------|
-| `https://api.conpronto.com/documento/<ID>/cobro/`                                               | POST   |
-| `https://api.conpronto.com/documento/<ID>/cobro/`                                               | GET    |
-| `GET https://api.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
-| `https://api.conpronto.com/cobro/<PASARELA>/`                                                   | GET    |
+| `https://app.conpronto.com/documento/<ID>/cobro/`                                               | POST   |
+| `https://app.conpronto.com/documento/<ID>/cobro/`                                               | GET    |
+| `GET https://app.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
+| `https://app.conpronto.com/cobro/<PASARELA>/`                                                   | GET    |
