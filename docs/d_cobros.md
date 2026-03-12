@@ -82,8 +82,6 @@ Content-Type: application/json
 
 ### Respuesta
 
-Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
-
 ```json title="Respuesta paginada"
 {
   "count": 1,
@@ -101,19 +99,6 @@ Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
 }
 ```
 
-Cuando `paginado=false`, la respuesta es una lista:
-
-```json title="Respuesta (paginado=false)"
-[
-  {
-    "id": 981234,
-    "id_cliente": 123445,
-    "fecha_emision": "2026-03-10 10:00:00",
-    "metodo_pago": "TRANSFERENCIA",
-    "total": 4.05
-  }
-]
-```
 
 ## Obtener un Pago (GET)
 

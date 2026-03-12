@@ -85,7 +85,6 @@ Content-Type: application/json
 
 ### Respuesta
 
-Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
 
 ```json title="Respuesta paginada"
 {
@@ -110,25 +109,6 @@ Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
 }
 ```
 
-Cuando `paginado=false`, la respuesta es una lista:
-
-```json title="Respuesta (paginado=false)"
-[
-  {
-    "id": 4597246,
-    "id_cliente": 123445,
-    "no_documento": "API-0000001",
-    "fecha_emision": "2026-03-03 00:00:00",
-    "fecha_vencimiento": "2026-03-10 00:00:00",
-    "valor_neto": 1.0,
-    "valor_imp": 0.15,
-    "saldo": 1.15,
-    "tipo_documento": "FAC",
-    "estado": 1,
-    "informacion": "Documento creado via API"
-  }
-]
-```
 
 ## Obtener un Documento (GET)
 
