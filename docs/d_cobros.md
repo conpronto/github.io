@@ -1,160 +1,195 @@
-# Cobro
+# Pagos 
 
-## Objeto Cobro
+En esta documentación, un **pago** corresponde a lo que históricamente se conocía como **cobro**.
 
-``` json title="Objeto Cobro:"
-[
-   {
-    "id": "7423",
-    "documento_id": "1234",
-    "marca_tarjeta": "MASTERCARD",
-    "pasarela_pago": "DT",	
-    "fecha_emision": "13/06/2023 13:21:01",
-    "fecha_modificacion": "22/06/2023",	
-    "tipo_cobro": "TC",
-    "total": "1100.0"
-   }
-]
-```
-Atributos del objeto Cobro.
+## Objeto Pago
 
-Los tipos de cobros soportados vía API son:
-
-| Valor       | Tipo                                 |
-| ----------- | ------------------------------------ |
-| `EF  `       | Efectivo                             |
-| `TR `       | Transferencia|
-| `TC  `       | Tarjeta de credito |
-| `CH  `       | Cheque |
-| `CR  `       | Cruce de documentos |
-
-Los tipos de pasarela de pagos soportados para pago con tarjeta son:
-
-| Valor       | Tipo                                 |
-| ----------- | ------------------------------------ |
-| `DT  `       | Datafast                            |
-| `PH `       | Payphone|
-
-| Parámetro       | Tipo    | Longitud | Obligatorio | Descripción |
-| -----------   | ------- | -------- |-------|----------- |
-| `id`|varchar|10|Si| Identificador del cobro en el sistema|
-| `documento_id`|varchar|10|Si| Identificador del documento en el sistema|
-| `marca_tarjeta`|varchar|20|Si*| Marca de tarjeta de crédito   |
-| `pasarela_pagos`|varchar|10|Si*|Pasarela de pagos usada (Payphone, datafast)|
-| `fecha_emision`|date|-|Si| Fecha que se realiza la transacción  |
-| `fecha_modificacion` |date|-|No|Última fecha en la que se modificó |
-| `tipo_cobro`|varchar|10|Si| Tipo de cobro: (Efectivo, Transferencia, Tarjeta Crédito, Cheque, Cruce de Documento)|
-| `total` |decimal|10|Si|Valor total del cobro|
-
-## Crear Cobros (POST)
-
-Para crear un cobro se debe de hacer uso de la url:
-
-`POST https://app.conpronto.com/documento/<ID>/cobro/`
-
-Cambiando el parámetro por el id del documento (devuelto al momento de crear el documento).
-
-``` json title="Estructura del JSON:"
+```json title="Objeto Pago"
 {
-    "id": "7423",
-    "documento_id": "1234",
-    "marca_tarjeta": Null,
-    "pasarela_pago": Null,	
-    "fecha_emision": "13/06/2023 13:21:01",
-    "fecha_modificacion": "22/06/2023",	
-    "tipo_cobro": "EF",
-    "total": "1100.0"
+  "id": 981234,
+  "id_cliente": 123445,
+  "fecha_emision": "2026-03-10 10:00:00",
+  "metodo_pago": "TRANSFERENCIA",
+  "total": 4.05,
+  "documentos": [
+    {
+      "id_documento": 4597246,
+      "valor": 1.15
+    },
+    {
+      "id_documento": 3768142,
+      "valor": 0.6
+    },
+    {
+      "id_documento": 3425488,
+      "valor": 2.3
+    }
+  ]
 }
 ```
-*NOTA :material-information-outline:{ title="Nota" }:
 
-:bangbang: Los campos marca_tarjeta y pasarela_pagos solo son obligatorios cuando el tipo de cobro es tarjeta.
+### Atributos del objeto Pago
 
-## Obtener Cobros por documento (GET)
+| Parámetro       | Tipo     | Longitud | Obligatorio | Descripción |
+|----------------|----------|----------|-------------|-------------|
+| `id`           | integer  |          | No          | Identificador interno del pago |
+| `id_cliente`   | integer  |          | Si          | Identificador del cliente |
+| `fecha_emision`| datetime |          | Si          | Fecha/hora del pago (`YYYY-MM-DD HH:MM:SS`) |
+| `metodo_pago`  | string   |          | Si          | Método de pago (ejemplo: `TRANSFERENCIA`) |
+| `total`        | number   |          | Si          | Valor total del pago |
+| `documentos`   | list     |          | Si          | Lista de documentos a los que aplica el pago |
 
-Podemos consultar los cobros que tiene un documento por medio de la url:
+#### Atributos del objeto `documentos[]`
 
-`GET https://app.conpronto.com/documento/<ID>/cobro/`
+| Parámetro       | Tipo    | Longitud | Obligatorio | Descripción |
+|----------------|---------|----------|-------------|-------------|
+| `id_documento` | integer |          | Si          | Identificador del documento |
+| `valor`        | number  |          | Si          | Valor del pago aplicado a ese documento |
 
-Usando el id devuelto en la creación de documento.
+### Métodos de pago (`metodo_pago`)
 
-``` json title="Respuesta al consultar los cobros:"
+Internamente, Pronto mapea el valor de `metodo_pago` a un código numérico. Los valores soportados son:
+
+| `metodo_pago`        | Código |
+|----------------------|--------|
+| `EFECTIVO`           | `0`    |
+| `TRANSFERENCIA`      | `1`    |
+| `TARJETA CREDITO`    | `2`    |
+| `TARJETA CRÉDITO`    | `2`    |
+| `CHEQUE`             | `3`    |
+| `CRUCE DE DOCUMENTO` | `4`    |
+
+## Obtener listado de Pagos (GET)
+
+```bash title="URL"
+GET https://app.conpronto.com/api/v1/payments/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Parámetros de Consulta (Opcionales)
+
+| Parámetro     | Tipo    | Descripción |
+|---------------|---------|-------------|
+| `p`           | integer | Número de página |
+| `page_size`   | integer | Cantidad de registros por página |
+| `id_cliente`  | integer | Filtra por cliente |
+| `metodo_pago` | string  | Filtra por método de pago |
+| `search`      | string  | Texto de búsqueda (según configuración del partner) |
+| `fecha_desde` | date    | Filtra desde la fecha (`YYYY-MM-DD`) |
+| `fecha_hasta` | date    | Filtra hasta la fecha (`YYYY-MM-DD`) |
+
+### Respuesta
+
+Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
+
+```json title="Respuesta paginada"
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 981234,
+      "id_cliente": 123445,
+      "fecha_emision": "2026-03-10 10:00:00",
+      "metodo_pago": "TRANSFERENCIA",
+      "total": 4.05
+    }
+  ]
+}
+```
+
+Cuando `paginado=false`, la respuesta es una lista:
+
+```json title="Respuesta (paginado=false)"
 [
-   {
-	"id": "7423",
-	"documento_id": "1234",
-   "marca_tarjeta": Null,
-   "pasarela_pago": Null,	
- 	"fecha_emision": "13/06/2023",  
-	"fecha_modificacion": "22/06/2023",
-	"fecha_emision": "13/06/2023",
-	"tipo_cobro": "CH",
-	"total": "1100.0"
-   }
+  {
+    "id": 981234,
+    "id_cliente": 123445,
+    "fecha_emision": "2026-03-10 10:00:00",
+    "metodo_pago": "TRANSFERENCIA",
+    "total": 4.05
+  }
 ]
-``` 
-## Obtener Cobros por un rango de fechas (GET)
+```
 
-`GET https://app.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
+## Obtener un Pago (GET)
 
-Ejemplo:
+```bash title="URL"
+GET https://app.conpronto.com/api/v1/payments/{id}/
+```
 
-`GET https://app.conpronto.com/cobro/?fecha_inicial=1/02/2023&fecha_final=28/02/2023`
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
 
-``` json title="Respuesta al consultar los cobros:"
-[
-   {
-	"id": "7423",
-	"documento_id": "1234",
-   "marca_tarjeta": Null,
-   "pasarela_pago": Null,	
-	"fecha_emision": "15/02/2023",
-	"fecha_modificacion": "22/06/2023",
-	"tipo_cobro": "CH",
-	"total": "1100.0"
-   },
-   {
-   "id": "7423",
-   "documento_id": "1234",
-   "marca_tarjeta": "MASTERCARD",
-   "pasarela_pago": "DT",	
-   "fecha_emision": "13/02/2023 13:21:01",
-   "fecha_modificacion": "22/06/2023",	
-   "tipo_cobro": "TC",
-   "total": "1100.0"
-   }
-]
-``` 
+Respuesta 200
+[Devuelve el objeto Pago.](#objeto-pago)
 
-## Obtener Cobros realizados por Datafast o Payphone (GET)
+## Crear Pago (POST)
 
-Podemos consultar los cobros realizados por Datafast o Payphone por medio de la url:
+```bash title="URL"
+POST https://app.conpronto.com/api/v1/payments/
+```
 
-`GET https://app.conpronto.com/cobro/<PASARELA>/`
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
 
-Usando el código de la pasarela de pago en la creación del cobro.
+### Estructura del JSON
 
-``` json title="Respuesta al consultar los cobros:"
-[
-   {
-   "id": "7423",
-   "documento_id": "1234",
-   "marca_tarjeta": "MASTERCARD",
-   "pasarela_pago": "DT",	
-   "fecha_emision": "13/06/2023 13:21:01",
-   "fecha_modificacion": "22/06/2023",	
-   "tipo_cobro": "TC",
-   "total": "1100.0"
-   },
-   {
-   "id": "4586",
-   "documento_id": "5678",
-   "marca_tarjeta": "VISA",
-   "pasarela_pago": "DT",	
-   "fecha_emision": "15/06/2023 13:50:01",
-   "fecha_modificacion": "27/06/2023",	
-   "tipo_cobro": "TC",
-   "total": "200.0"
-   }
-]
+```json title="Body"
+{
+  "id_cliente": 123445,
+  "fecha_emision": "2026-03-10 10:00:00",
+  "metodo_pago": "TRANSFERENCIA",
+  "total": 4.05,
+  "documentos": [
+    {
+      "id_documento": 4597246,
+      "valor": 1.15
+    },
+    {
+      "id_documento": 3768142,
+      "valor": 0.6
+    },
+    {
+      "id_documento": 3425488,
+      "valor": 2.3
+    }
+  ]
+}
+```
+
+### Comportamiento
+
+- `id_cliente` debe existir y pertenecer al partner autenticado.
+- Cada item de `documentos[]` aplica un valor de pago a un documento.
+
+### Respuesta
+
+Respuesta 201
+[Devuelve el objeto Pago.](#objeto-pago)
+
+## Eliminar Pago (DELETE)
+
+```bash title="URL"
+DELETE https://app.conpronto.com/api/v1/payments/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Respuesta
+
+```bash title="Respuesta"
+204 No Content
 ```

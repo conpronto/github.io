@@ -25,7 +25,7 @@ Para consumir los endpoints es necesario:
 
 ### Obtener Access Token
 
-POST https://app.conpronto.com/api/v1/auth/token/
+POST https://app.conpronto.com/api/v1/auth/tokens/
 
 ```json title="Body"
 {
@@ -94,18 +94,18 @@ Las siguientes son url's válidas para uso del api:
 
 ### Url's de documento
 
-| URL                                                                                             | Método |
-|-------------------------------------------------------------------------------------------------|--------|
-| `https://app.conpronto.com/documento/`                                                          | POST   |
-| `https://app.conpronto.com/documento/`                                                          | PUT    |
-| `https://app.conpronto.com/documento/<ID>/`                                                     | GET    |
-| `https://app.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
+| URL                                                                                              | Método |
+|--------------------------------------------------------------------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/documents/`                                                    | GET    |
+| `https://app.conpronto.com/api/v1/documents/<ID>/`                                               | GET    |
+| `https://app.conpronto.com/api/v1/documents/`                                                    | POST   |
+| `https://app.conpronto.com/api/v1/documents/<ID>/`                                               | PUT    |
 
-### Url's de cobro
+### Url's de pagos
 
-| URL                                                                                             | Método |
-|-------------------------------------------------------------------------------------------------|--------|
-| `https://app.conpronto.com/documento/<ID>/cobro/`                                               | POST   |
-| `https://app.conpronto.com/documento/<ID>/cobro/`                                               | GET    |
-| `GET https://app.conpronto.com/cobro/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/` | GET    |
-| `https://app.conpronto.com/cobro/<PASARELA>/`                                                   | GET    |
+| URL                                                                                               | Método |
+|---------------------------------------------------------------------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/payments/`                                                      | GET    |
+| `https://app.conpronto.com/api/v1/payments/<ID>/`                                                 | GET    |
+| `https://app.conpronto.com/api/v1/payments/`                                                      | POST   |
+| `https://app.conpronto.com/api/v1/payments/<ID>/`                                                 | DELETE |

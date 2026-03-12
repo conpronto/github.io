@@ -1,260 +1,250 @@
-# Documento
+# Documentos
+
 ## Objeto Documento
 
-``` json title="Objeto Documento:"
-[{
-    "id": "7466",
-    "cliente_id": "52235",
-    "suscripcion_id": "74135",
-    "fecha_modificacion": "22/06/2023",
-    "fecha_emision": "13/06/2023",
-    "fecha_vencimiento": "17/10/2023",
-    "numero": "001-001-000000251",
-    "autorizacion": "45678932598466966",
-    "estado": "1",
-    "descripcion": "Venta por web",    
-    "impuesto": "0.0",
-    "total": "11200.0",
-    "saldo": "9900.0",
-    "cobro": 
-    [{
-	    "id": "455852",
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "1200.0"
-    }],
-    "retencion":
-    [{
-      "id": "56051",
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }]
-}]
- 
-```
-Los estados de documento son:
-
-| Valor       | Tipo                                 |
-| ----------- | ------------------------------------ |
-| `1  `       | Activo                               |
-| `0  `       | Anulado|
-
-Atributos del objeto Documento:
-
-| Parámetro   | Tipo    | Longitud | Obligatorio | Descripción |
-| ----------- | ------- | -------- | ----------- | ----------- |
-| `id` | varchar | 10 | Si | Identificador del cliente al que pertenece el documento en el sistema|
-| `cliente_id` | varchar | 10 | Si | Identificador del cliente al que pertenece el documento en el sistema|
-| `suscripcion_id` | varchar | 10 | Si | Identificador de la suscripción al que pertenece el documento en el sistema|
-| `fecha_modificacion` | date | - | Si|Última fecha en la que se modificó|
-| `fecha_emision ` | date | - | Si| Fecha de creación del documento|
-| `fecha_vencimiento ` | date | - | Si| Fecha límite de vigencia del documento|
-| `numero`|varchar|17|Si|Número del documento|
-| `autorizacion`|varchar|49|Si|Número de autorización del documento|
-| `estado`|varchar|10|Si|Representa el estado del documento (Activo o Anulado)|
-| `descripcion`|varchar|100|Si|Representa la descripción del documento|
-| `impuesto`|decimal|10|Si|Representa el valor del impuesto del documento|
-| `total`|decimal|10|Si|Representa el valor total del documento|
-| `saldo`|decimal|10|Si|Representa el valor del saldo del documento|
-| `cobro `| objeto | - | No| Objeto contenedor del cobro del documento|
-| `retencion`|objeto|-|No|Objeto contenedor de la retención del documento|
-
-## Crear Documento (POST)
-
-Para crear un documento se debe de hacer uso de la url:
-
-`POST https://app.conpronto.com/documento/`
-
-Por medio del método POST enviando en el cuerpo del requerimiento los datos del documento.
-
-``` json title="Estructura del JSON:"
- {
-    "cliente_id": "5662",
-    "suscripcion_id": "74135",
-    "fecha_emision": "13/06/2023",
-    "fecha_vencimiento": "17/07/2023",
-    "numero": "001-002-000000451",
-    "autorizacion": "565645678932448598466966",
-    "estado": "1",
-    "descripcion": "Venta por web",      
-    "impuesto": "0.0",
-    "total": "11200.0",
-    "saldo": "9900.0",
-    "cobro":
-    [{
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "1200.0"
-    }],
-    "retencion":
-    [{
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }],
-}
-```
-## Modificar Documento (PUT)
-
-Este servicio permite modificar un documento creado por API.
-
-Para modificar un documento se debe hacer uso de la url:
-
-`PUT https://app.conpronto.com/documento/`
-
-Los datos que se envían al momento de la actualización son los mismos que al momento de la creación aumentando el parámetro "id" dentro del json.
-
-``` json title="Estructura del JSON:"
+```json title="Objeto Documento"
 {
-    "id": "7856",
-    "cliente_id": "45248",
-    "suscripcion_id": "74135",
-    "fecha_emision": "13/06/2023",
-    "fecha_vencimiento": "17/10/2023",
-    "numero ": "001-001-000000251",
-    "autorizacion": "45678932598466966",
-    "estado": "1",
-    "descripcion": "Venta por web",  
-    "impuesto": "0.0",
-    "total": "11200.0",
-    "saldo": "9900.0",
-    "cobro": 
-    [{
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "1200.0"
-    }],
-    "retencion": 
-    [{
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero ": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }],
+  "id": 4597246,
+  "id_cliente": 123445,
+  "no_documento": "API-0000001",
+  "fecha_emision": "2026-03-03 00:00:00",
+  "fecha_vencimiento": "2026-03-10 00:00:00",
+  "url_ride": "https://ejemplo.com/ride/API-0000001.pdf",
+  "valor_neto": 1.0,
+  "valor_imp": 0.15,
+  "saldo": 1.15,
+  "tipo_documento": "FAC",
+  "estado": 1,
+  "informacion": "Documento creado via API",
+  "cobros": []
 }
-``` 
+```
+
+### Estados del documento
+
+El campo `estado` se maneja como un código numérico.
+
+| `estado` | Descripción |
+|----------|-------------|
+| `0`      | COBRADO     |
+| `1`      | PENDIENTE   |
+| `2`      | PAGADO      |
+| `3`      | ANULADO     |
+| `4`      | GENERADO    |
+| `5`      | FACTURADO   |
+
+### Tipos de documento (`tipo_documento`)
+
+Internamente, Pronto mapea el valor de `tipo_documento` a un código numérico. Los valores soportados son:
+
+| `tipo_documento` | Código |
+|------------------|--------|
+| `FAC`            | `0`    |
+| `DNA`            | `1`    |
+| `EXP`            | `2`    |
+
+
+### Atributos del objeto Documento
+
+| Parámetro           | Tipo     | Longitud  | Obligatorio | Descripción                                            |
+|---------------------|----------|-----------|-------------|--------------------------------------------------------|
+| `id`                | integer  |           | No          | Identificador interno del documento                    |
+| `id_cliente`        | integer  |           | Si          | Identificador del cliente                              |
+| `no_documento`      | string   | 50        | Si          | Referencia o número del documento                      |
+| `fecha_emision`     | datetime |           | Si          | Fecha de emisión del documento (`YYYY-MM-DD HH:MM:SS`) |
+| `fecha_vencimiento` | datetime |           | Si          | Fecha de vencimiento (`YYYY-MM-DD HH:MM:SS`)           |
+| `url_ride`          | string   | 200       | No          | URL del RIDE/archivo del documento                     |
+| `valor_neto`        | number   |           | Si          | Valor neto (sin impuestos)                             |
+| `valor_imp`         | number   |           | Si          | Valor de impuestos                                     |
+| `saldo`             | number   |           | Si          | Saldo pendiente del documento                          |
+| `tipo_documento`    | string   | 3         | Si          | Tipo de documento (ejemplo: `FAC`)                     |
+| `estado`            | integer  |           | Si          | Estado del documento (`0` a `5`)                       |
+| `informacion`       | string   |           | No          | Información adicional (observación)                    |
+| `cobros`            | list     |           | No          | Lista de pagos asociados (generalmente solo lectura)   |
+
+## Obtener listado de Documentos (GET)
+
+```bash title="URL"
+GET https://app.conpronto.com/api/v1/documents/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Parámetros de Consulta (Opcionales)
+
+| Parámetro    | Tipo    | Descripción                                         |
+|--------------|---------|-----------------------------------------------------|
+| `p`          | integer | Número de página                                    |
+| `page_size`  | integer | Cantidad de registros por página                    |
+| `search`     | string  | Texto de búsqueda (según configuración del partner) |
+| `fecha_desde`| date    | Filtra desde la fecha (`YYYY-MM-DD`)                |
+| `fecha_hasta`| date    | Filtra hasta la fecha (`YYYY-MM-DD`)                |
+
+### Respuesta
+
+Cuando `paginado` no se envía (o es `true`), la respuesta es paginada:
+
+```json title="Respuesta paginada"
+{
+  "count": 2,
+  "next": "https://app.conpronto.com/api/v1/documents/?p=2&page_size=10",
+  "previous": null,
+  "results": [
+    {
+      "id": 4597246,
+      "id_cliente": 123445,
+      "no_documento": "API-0000001",
+      "fecha_emision": "2026-03-03 00:00:00",
+      "fecha_vencimiento": "2026-03-10 00:00:00",
+      "valor_neto": 1.0,
+      "valor_imp": 0.15,
+      "saldo": 1.15,
+      "tipo_documento": "FAC",
+      "estado": 1,
+      "informacion": "Documento creado via API"
+    }
+  ]
+}
+```
+
+Cuando `paginado=false`, la respuesta es una lista:
+
+```json title="Respuesta (paginado=false)"
+[
+  {
+    "id": 4597246,
+    "id_cliente": 123445,
+    "no_documento": "API-0000001",
+    "fecha_emision": "2026-03-03 00:00:00",
+    "fecha_vencimiento": "2026-03-10 00:00:00",
+    "valor_neto": 1.0,
+    "valor_imp": 0.15,
+    "saldo": 1.15,
+    "tipo_documento": "FAC",
+    "estado": 1,
+    "informacion": "Documento creado via API"
+  }
+]
+```
 
 ## Obtener un Documento (GET)
 
-Para obtener un documento se debe de hacer uso de la url:
-
-`GET https://app.conpronto.com/documento/<ID>`
-
-Devuelve un documento con el <ID> solicitado.
-
-Respuesta al consultar un documento:
-
-``` json title="Respuesta al consultar un documento:"
-[{
-    "id": "7856",
-    "cliente_id": "45248",
-    "suscripcion_id": "74135",
-    "fecha_emision": "13/06/2023",
-    "fecha_vencimiento": "17/10/2023",
-    "numero ": "001-001-000000251",
-    "autorizacion": "45678932598466966",
-    "estado": "1",
-    "descripcion": "Venta por web",  
-    "impuesto": "0.0",
-    "total": "11200.0",
-    "saldo": "9900.0",
-    [{
-	    "id": "7466",
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "1200.0"
-    }],
-      "retencion": 
-    [{
-      "id": "7466",
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }],
-  }]
+```bash title="URL"
+GET https://app.conpronto.com/api/v1/documents/{id}/
 ```
 
-## Obtener Documentos por rango de fechas (GET)
-
-Para obtener los documentos de un rango de fechas determinado hacemos uso del endpoint:
-
-`GET https://app.conpronto.com/documento/?fecha_inicial=<FECHA_INICIAL>&fecha_final=<FECHA_FINAL>/`
-
-Ejemplo:
-
-`GET https://app.conpronto.com/documento/?fecha_inicial=1/02/2023&fecha_final=28/02/2023/`
-
-``` json title="Respuesta al consultar todos los documentos:"
-[{ 
-    "id": "7466",
-    "cliente_id": "52235",
-    "suscripcion:id": "74135",
-    "fecha_modificacion": "22/06/2023",
-    "fecha_emision": "13/02/2023",
-    "fecha_vencimiento": "17/10/2023",
-    "numero ": "001-001-000000251",
-    "autorizacion": "45678932598466966",
-    "estado": "1",
-    "descripcion": "Venta por web",  
-    "impuesto": "0.0",
-    "total": "11200.0",
-    "saldo": "9900.0",
-    "cobro": 
-    [{
-	    "id": "455852",
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "1200.0"
-    }],
-    "retencion":
-    [{
-      "id": "56051",
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }],
- },
- {
-    "id": "5453",
-    "cliente_id": "54522",
-    "suscripcion_id": "325698",
-    "fecha_modificacion": "22/06/2023",
-    "fecha_emision": "25/02/2023",
-    "fecha_vencimiento": "17/05/2023",
-    "numero": "001-001-000000471",
-    "autorizacion": "456789325984646466966",
-    "estado": "1",
-    "descripcion": "Venta al por mayor",
-    "impuesto": "0.0",
-    "total": "2000.0",
-    "saldo": "1000.0",
-    "cobro": 
-    [{
-	    "id": "455852",
-	    "fecha_emision": "13/06/2023",
-	    "tipo_cobro": "EF",
-	    "total": "900.0"
-    }],
-    "retencion": 
-    [{
-      "id": "56051",
-      "fecha_emision": "13/06/2023",
-      "total": "100.0",
-      "numero": "001-001-000005361",
-      "autorizacion": "45678932598466966",
-      "estado": "1"
-    }],
- },
- ...
-] 
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
 ```
+
+Respuesta 200
+[Devuelve el objeto Documento.](#objeto-documento)
+
+## Crear Documento (POST)
+
+```bash title="URL"
+POST https://app.conpronto.com/api/v1/documents/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Estructura del JSON
+
+```json title="Body"
+{
+  "id_cliente": 123445,
+  "no_documento": "API-0000001",
+  "fecha_emision": "2026-03-03 00:00:00",
+  "fecha_vencimiento": "2026-03-10 00:00:00",
+  "url_ride": "https://ejemplo.com/ride/API-0000001.pdf",
+  "valor_neto": 1.0,
+  "valor_imp": 0.15,
+  "saldo": 1.15,
+  "tipo_documento": "FAC",
+  "estado": 1,
+  "informacion": "Documento creado via API",
+  "cobros": [
+    {
+      "fecha_emision": "2026-03-10 10:00:00",
+      "metodo_pago": "TRANSFERENCIA",
+      "valor": 1.15
+    }
+  ]
+}
+```
+
+### Comportamiento
+
+- `id_cliente` debe existir y pertenecer al partner autenticado.
+- Se recomienda inicializar `saldo` con el valor pendiente del documento (por ejemplo, `valor_neto + valor_imp`).
+- `cobros` normalmente se envía como `[]` u omitir; los pagos se gestionan en el módulo de [Pagos](d_cobros.md).
+
+### Respuesta
+
+Respuesta 201
+[Devuelve el objeto Documento.](#objeto-documento)
+
+## Actualizar Documento (PUT)
+
+```bash title="URL"
+PUT https://app.conpronto.com/api/v1/documents/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Estructura del JSON
+
+```json title="Body"
+{
+  "fecha_vencimiento": "2026-04-15 00:00:00",
+  "url_ride": "https://ejemplo.com/ride/actualizado.pdf",
+  "saldo": 0.0,
+  "estado": 0,
+  "informacion": "Actualizado via API"
+}
+```
+
+### Comportamiento
+
+- Actualiza el documento indicado por `{id}`.
+- Para actualizaciones parciales se recomienda usar `PATCH`.
+
+### Respuesta
+
+Respuesta 200
+[Devuelve el objeto Documento.](#objeto-documento)
+
+## Actualizar Documento (PATCH)
+
+```bash title="URL"
+PATCH https://app.conpronto.com/api/v1/documents/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Estructura del JSON
+
+```json title="Body"
+{
+  "saldo": 24.0,
+  "estado": 1
+}
+```
+
+### Respuesta
+
+Respuesta 200
+[Devuelve el objeto Documento.](#objeto-documento)
