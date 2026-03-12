@@ -1,7 +1,5 @@
 # Pagos 
 
-En esta documentación, un **pago** corresponde a lo que históricamente se conocía como **cobro**.
-
 ## Objeto Pago
 
 ```json title="Objeto Pago"
