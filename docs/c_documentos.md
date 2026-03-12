@@ -197,34 +197,9 @@ Content-Type: application/json
 ### Comportamiento
 
 - Actualiza el documento indicado por `{id}`.
-- Para actualizaciones parciales se recomienda usar `PATCH`.
 
 ### Respuesta
 
 Respuesta 200
 [Devuelve el objeto Documento.](#objeto-documento)
 
-## Actualizar Documento (PATCH)
-
-```bash title="URL"
-PATCH https://app.conpronto.com/api/v1/documents/{id}/
-```
-
-```bash title="Headers"
-Authorization: Bearer <access_token>
-Content-Type: application/json
-```
-
-### Estructura del JSON
-
-```json title="Body"
-{
-  "saldo": 24.0,
-  "estado": 1
-}
-```
-
-### Respuesta
-
-Respuesta 200
-[Devuelve el objeto Documento.](#objeto-documento)
