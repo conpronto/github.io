@@ -209,7 +209,7 @@ Content-Type: application/json
 ### Comportamiento
 
 - Elimina el documento indicado por `{id}`.
-- Si el documento tiene pagos asociados o restricciones de negocio, la API eliminará rechazar la eliminación.
+- Si el documento tiene pagos asociados, estos también se eliminarán..
 
 ### Respuesta
 
