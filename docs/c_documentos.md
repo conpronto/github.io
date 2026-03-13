@@ -24,43 +24,39 @@
 
 El campo `estado` se maneja como un código numérico.
 
-| `estado` | Descripción |
-|----------|-------------|
-| `0`      | COBRADO     |
-| `1`      | PENDIENTE   |
-| `2`      | PAGADO      |
-| `3`      | ANULADO     |
-| `4`      | GENERADO    |
-| `5`      | FACTURADO   |
+| `estado`  |
+|-----------|
+| COBRADO   |
+| PENDIENTE |
+| ANULADO   |
 
 ### Tipos de documento (`tipo_documento`)
 
 Internamente, Pronto mapea el valor de `tipo_documento` a un código numérico. Los valores soportados son:
 
-| `tipo_documento` | Código |
-|------------------|--------|
-| `FAC`            | `0`    |
-| `DNA`            | `1`    |
-| `EXP`            | `2`    |
-
+| `tipo_documento` |
+|------------------|
+| `FAC`            |
+| `DNA`            |
+| `EXP`            |
 
 ### Atributos del objeto Documento
 
-| Parámetro           | Tipo     | Longitud  | Obligatorio | Descripción                                            |
-|---------------------|----------|-----------|-------------|--------------------------------------------------------|
-| `id`                | integer  |           | No          | Identificador interno del documento                    |
-| `id_cliente`        | integer  |           | Si          | Identificador del cliente                              |
-| `no_documento`      | string   | 50        | Si          | Referencia o número del documento                      |
-| `fecha_emision`     | datetime |           | Si          | Fecha de emisión del documento (`YYYY-MM-DD HH:MM:SS`) |
-| `fecha_vencimiento` | datetime |           | Si          | Fecha de vencimiento (`YYYY-MM-DD HH:MM:SS`)           |
-| `url_ride`          | string   | 200       | No          | URL del RIDE/archivo del documento                     |
-| `valor_neto`        | number   |           | Si          | Valor neto (sin impuestos)                             |
-| `valor_imp`         | number   |           | Si          | Valor de impuestos                                     |
-| `saldo`             | number   |           | Si          | Saldo pendiente del documento                          |
-| `tipo_documento`    | string   | 3         | Si          | Tipo de documento (ejemplo: `FAC`)                     |
-| `estado`            | integer  |           | Si          | Estado del documento (`0` a `5`)                       |
-| `informacion`       | string   |           | No          | Información adicional (observación)                    |
-| `cobros`            | list     |           | No          | Lista de pagos asociados (generalmente solo lectura)   |
+| Parámetro           | Tipo     | Longitud | Obligatorio | Descripción                                            |
+|---------------------|----------|----------|-------------|--------------------------------------------------------|
+| `id`                | integer  |          | No          | Identificador interno del documento                    |
+| `id_cliente`        | integer  |          | Si          | Identificador del cliente                              |
+| `no_documento`      | string   | 50       | Si          | Referencia o número del documento                      |
+| `fecha_emision`     | datetime |          | Si          | Fecha de emisión del documento (`YYYY-MM-DD HH:MM:SS`) |
+| `fecha_vencimiento` | datetime |          | Si          | Fecha de vencimiento (`YYYY-MM-DD HH:MM:SS`)           |
+| `url_ride`          | string   | 200      | No          | URL del RIDE/archivo del documento                     |
+| `valor_neto`        | number   |          | Si          | Valor neto (sin impuestos)                             |
+| `valor_imp`         | number   |          | Si          | Valor de impuestos                                     |
+| `saldo`             | number   |          | Si          | Saldo pendiente del documento                          |
+| `tipo_documento`    | string   | 3        | Si          | Tipo de documento (ejemplo: `FAC`)                     |
+| `estado`            | integer  |          | Si          | Estado del documento (`0` a `5`)                       |
+| `informacion`       | string   |          | No          | Información adicional (observación)                    |
+| `cobros`            | list     |          | No          | Lista de pagos asociados (generalmente solo lectura)   |
 
 ## Obtener listado de Documentos (GET)
 
@@ -75,16 +71,15 @@ Content-Type: application/json
 
 ### Parámetros de Consulta (Opcionales)
 
-| Parámetro    | Tipo    | Descripción                                         |
-|--------------|---------|-----------------------------------------------------|
-| `p`          | integer | Número de página                                    |
-| `page_size`  | integer | Cantidad de registros por página                    |
-| `search`     | string  | Texto de búsqueda (según configuración del partner) |
-| `fecha_desde`| date    | Filtra desde la fecha (`YYYY-MM-DD`)                |
-| `fecha_hasta`| date    | Filtra hasta la fecha (`YYYY-MM-DD`)                |
+| Parámetro     | Tipo    | Descripción                                         |
+|---------------|---------|-----------------------------------------------------|
+| `p`           | integer | Número de página                                    |
+| `page_size`   | integer | Cantidad de registros por página                    |
+| `search`      | string  | Texto de búsqueda (según configuración del partner) |
+| `fecha_desde` | date    | Filtra desde la fecha (`YYYY-MM-DD`)                |
+| `fecha_hasta` | date    | Filtra hasta la fecha (`YYYY-MM-DD`)                |
 
 ### Respuesta
-
 
 ```json title="Respuesta paginada"
 {
@@ -108,7 +103,6 @@ Content-Type: application/json
   ]
 }
 ```
-
 
 ## Obtener un Documento (GET)
 
@@ -188,8 +182,6 @@ Content-Type: application/json
 {
   "fecha_vencimiento": "2026-04-15 00:00:00",
   "url_ride": "https://ejemplo.com/ride/actualizado.pdf",
-  "saldo": 0.0,
-  "estado": 0,
   "informacion": "Actualizado via API"
 }
 ```
@@ -203,3 +195,24 @@ Content-Type: application/json
 Respuesta 200
 [Devuelve el objeto Documento.](#objeto-documento)
 
+## Eliminar Documento (DELETE)
+
+```bash title="URL"
+DELETE https://app.conpronto.com/api/v1/documents/{id}/
+```
+
+```bash title="Headers"
+Authorization: Bearer <access_token>
+Content-Type: application/json
+```
+
+### Comportamiento
+
+- Elimina el documento indicado por `{id}`.
+- Si el documento tiene pagos asociados o restricciones de negocio, la API eliminará rechazar la eliminación.
+
+### Respuesta
+
+```bash title="Respuesta"
+204 No Content
+```

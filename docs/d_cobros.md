@@ -1,4 +1,4 @@
-# Pagos 
+# Pagos
 
 ## Objeto Pago
 
@@ -28,34 +28,32 @@
 
 ### Atributos del objeto Pago
 
-| Parámetro       | Tipo     | Longitud | Obligatorio | Descripción |
-|----------------|----------|----------|-------------|-------------|
-| `id`           | integer  |          | No          | Identificador interno del pago |
-| `id_cliente`   | integer  |          | Si          | Identificador del cliente |
-| `fecha_emision`| datetime |          | Si          | Fecha/hora del pago (`YYYY-MM-DD HH:MM:SS`) |
-| `metodo_pago`  | string   |          | Si          | Método de pago (ejemplo: `TRANSFERENCIA`) |
-| `total`        | number   |          | Si          | Valor total del pago |
-| `documentos`   | list     |          | Si          | Lista de documentos a los que aplica el pago |
+| Parámetro       | Tipo     | Longitud | Obligatorio | Descripción                                  |
+|-----------------|----------|----------|-------------|----------------------------------------------|
+| `id`            | integer  |          | No          | Identificador interno del pago               |
+| `id_cliente`    | integer  |          | Si          | Identificador del cliente                    |
+| `fecha_emision` | datetime |          | Si          | Fecha/hora del pago (`YYYY-MM-DD HH:MM:SS`)  |
+| `metodo_pago`   | string   | 3        | Si          | Método de pago (ejemplo: `TRANSFERENCIA`)    |
+| `total`         | number   |          | Si          | Valor total del pago                         |
+| `documentos`    | list     |          | Si          | Lista de documentos a los que aplica el pago |
 
 #### Atributos del objeto `documentos[]`
 
-| Parámetro       | Tipo    | Longitud | Obligatorio | Descripción |
-|----------------|---------|----------|-------------|-------------|
-| `id_documento` | integer |          | Si          | Identificador del documento |
+| Parámetro      | Tipo    | Longitud | Obligatorio | Descripción                             |
+|----------------|---------|----------|-------------|-----------------------------------------|
+| `id_documento` | integer |          | Si          | Identificador del documento             |
 | `valor`        | number  |          | Si          | Valor del pago aplicado a ese documento |
 
 ### Métodos de pago (`metodo_pago`)
 
 Internamente, Pronto mapea el valor de `metodo_pago` a un código numérico. Los valores soportados son:
 
-| `metodo_pago`        | Código |
-|----------------------|--------|
-| `EFECTIVO`           | `0`    |
-| `TRANSFERENCIA`      | `1`    |
-| `TARJETA CREDITO`    | `2`    |
-| `TARJETA CRÉDITO`    | `2`    |
-| `CHEQUE`             | `3`    |
-| `CRUCE DE DOCUMENTO` | `4`    |
+| `metodo_pago` | Descripión    |
+|---------------|---------------|
+| `EF`          | Efectivo      |
+| `TRA`         | Transferencia |
+| `TC`          | Tarjeta       |
+| `CHQ`         | Cheque        |
 
 ## Obtener listado de Pagos (GET)
 
@@ -70,15 +68,15 @@ Content-Type: application/json
 
 ### Parámetros de Consulta (Opcionales)
 
-| Parámetro     | Tipo    | Descripción |
-|---------------|---------|-------------|
-| `p`           | integer | Número de página |
-| `page_size`   | integer | Cantidad de registros por página |
-| `id_cliente`  | integer | Filtra por cliente |
-| `metodo_pago` | string  | Filtra por método de pago |
+| Parámetro     | Tipo    | Descripción                                         |
+|---------------|---------|-----------------------------------------------------|
+| `p`           | integer | Número de página                                    |
+| `page_size`   | integer | Cantidad de registros por página                    |
+| `id_cliente`  | integer | Filtra por cliente                                  |
+| `metodo_pago` | string  | Filtra por método de pago                           |
 | `search`      | string  | Texto de búsqueda (según configuración del partner) |
-| `fecha_desde` | date    | Filtra desde la fecha (`YYYY-MM-DD`) |
-| `fecha_hasta` | date    | Filtra hasta la fecha (`YYYY-MM-DD`) |
+| `fecha_desde` | date    | Filtra desde la fecha (`YYYY-MM-DD`)                |
+| `fecha_hasta` | date    | Filtra hasta la fecha (`YYYY-MM-DD`)                |
 
 ### Respuesta
 
@@ -98,7 +96,6 @@ Content-Type: application/json
   ]
 }
 ```
-
 
 ## Obtener un Pago (GET)
 
