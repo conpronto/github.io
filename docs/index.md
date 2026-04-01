@@ -109,3 +109,9 @@ Las siguientes son url's válidas para uso del api:
 | `https://app.conpronto.com/api/v1/payments/<ID>/`                                                 | GET    |
 | `https://app.conpronto.com/api/v1/payments/`                                                      | POST   |
 | `https://app.conpronto.com/api/v1/payments/<ID>/`                                                 | DELETE |
+
+### Url's de link de pago
+
+| URL                                   | Método |
+|---------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/paylinks/` | POST   |
