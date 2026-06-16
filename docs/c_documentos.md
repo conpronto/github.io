@@ -75,7 +75,9 @@ Content-Type: application/json
 |---------------|---------|-----------------------------------------------------|
 | `p`           | integer | Número de página                                    |
 | `page_size`   | integer | Cantidad de registros por página                    |
+| `id_cliente`  | integer | Identificador de Cliente                            |
 | `search`      | string  | Texto de búsqueda (según configuración del partner) |
+| `tipo`        | integer | 1: VENCIDO, 2: POR VENCER                           |
 | `fecha_desde` | date    | Filtra desde la fecha (`YYYY-MM-DD`)                |
 | `fecha_hasta` | date    | Filtra hasta la fecha (`YYYY-MM-DD`)                |
 
