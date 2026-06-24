@@ -71,13 +71,10 @@ Content-Type: application/json
   "email": "nuevo@empresa.com",
   "identificacion": "0999999999001",
   "tipo_cuenta": 1,
-  "tipo_cuenta_descripcion": "CUENTA AHORROS",
   "codigo_establecimiento": "002",
   "convenio": "999",
-  "cuenta_debitos_automaticos": true,
-  "disponible_conciliacion": true,
-  "id_contifico": null,
-  "id_externo": "EXT-002"
+  "disponible_debitos_automaticos": true,
+  "disponible_conciliacion": true
 }
 ```
 
@@ -90,22 +87,20 @@ Content-Type: application/json
 
 ## Atributos del objeto Cuenta Bancaria
 
-| Parámetro                    | Tipo    | Longitud | Obligatorio | Descripción                                                 |
-|------------------------------|---------|----------|-------------|-------------------------------------------------------------|
-| `id_cuenta`                  | integer |          | No          | Identificador interno de la cuenta                          |
-| `id_banco`                   | integer |          | Si          | Banco asociado                                              |
-| `nombre_banco`               | string  |          | No          | Nombre del banco asociado                                   |
-| `numero_cuenta`              | string  | 30       | Si          | Número de cuenta bancaria                                   |
-| `beneficiario`               | string  | 200      | No          | Nombre del beneficiario                                     |
-| `email`                      | string  | 200      | No          | Correo asociado                                             |
-| `identificacion`             | string  | 22       | No          | RUC o identificación del beneficiario                       |
-| `tipo_cuenta`                | integer |          | Si          | Tipo de cuenta bancaria                                     |
-| `tipo_cuenta_descripcion`    | string  |          | No          | Descripción del tipo de cuenta                              |
-| `codigo_establecimiento`     | string  |          | No          | Código de establecimiento                                   |
-| `convenio`                   | string  |          | No          | Convenio bancario                                           |
-| `cuenta_debitos_automaticos` | boolean |          | No          | Indica si la cuenta será utilizada para débitos automáticos |
-| `disponible_conciliacion`    | boolean |          | No          | Indica si está disponible para conciliación                 |
-| `id_externo`                 | string  |          | No          | Identificador externo de integración                        |
+| Parámetro                        | Tipo     | Longitud   | Obligatorio | Descripción                                                 |
+|----------------------------------|----------|------------|-------------|-------------------------------------------------------------|
+| `id_cuenta`                      | integer  |            | No          | Identificador interno de la cuenta                          |
+| `id_banco`                       | integer  |            | Si          | Banco asociado                                              |
+| `nombre_banco`                   | string   |            | No          | Nombre del banco asociado                                   |
+| `numero_cuenta`                  | string   | 30         | Si          | Número de cuenta bancaria                                   |
+| `beneficiario`                   | string   | 200        | No          | Nombre del beneficiario                                     |
+| `email`                          | string   | 200        | No          | Correo asociado                                             |
+| `identificacion`                 | string   | 22         | No          | RUC o identificación del beneficiario                       |
+| `tipo_cuenta`                    | integer  |            | Si          | Tipo de cuenta bancaria                                     |
+| `codigo_establecimiento`         | string   |            | No          | Código de establecimiento                                   |
+| `convenio`                       | string   |            | No          | Convenio bancario                                           |
+| `disponible_debitos_automaticos` | boolean  |            | No          | Indica si la cuenta será utilizada para débitos automáticos |
+| `disponible_conciliacion`        | boolean  |            | No          | Indica si está disponible para conciliación                 |
 
 ---
 
@@ -136,8 +131,7 @@ Content-Type: application/json
       "email": "nuevo@empresa.com",
       "identificacion": "0999999999001",
       "tipo_cuenta": 1,
-      "tipo_cuenta_descripcion": "CUENTA AHORROS",
-      "cuenta_debitos_automaticos": true,
+      "disponible_debitos_automaticos": true,
       "disponible_conciliacion": true,
       "id_externo": "EXT-002"
     }
@@ -170,7 +164,7 @@ Content-Type: application/json
   "tipo_cuenta": 0,
   "codigo_establecimiento": "001",
   "convenio": "123456",
-  "cuenta_debitos_automaticos": true,
+  "disponible_debitos_automaticos": true,
   "disponible_conciliacion": false,
   "id_externo": "EXT-001"
 }
@@ -184,7 +178,7 @@ Content-Type: application/json
 
 ```json
 {
-  "cuenta_debitos_automaticos": true
+  "disponible_debitos_automaticos": true
 }
 ```
 
@@ -223,9 +217,8 @@ PUT https://app.conpronto.com/api/v1/bank_accounts/{id}/
   "tipo_cuenta": 1,
   "codigo_establecimiento": "002",
   "convenio": "999",
-  "cuenta_debitos_automaticos": true,
-  "disponible_conciliacion": true,
-  "id_externo": "EXT-002"
+  "disponible_debitos_automaticos": true,
+  "disponible_conciliacion": true
 }
 ```
 
