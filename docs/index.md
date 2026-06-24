@@ -110,6 +110,29 @@ Las siguientes son url's válidas para uso del api:
 | `https://app.conpronto.com/api/v1/payments/`                                                      | POST   |
 | `https://app.conpronto.com/api/v1/payments/<ID>/`                                                 | DELETE |
 
+### Url's de bancos
+
+Los bancos corresponden al catálogo disponible en Pronto para la configuración de cuentas bancarias.
+Este recurso es únicamente de consulta.
+
+| URL                                            | Método |
+|------------------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/banks/`      | GET    |
+
+
+### Url's de cuentas bancarias
+
+Permite administrar las cuentas bancarias asociadas al partner autenticado.
+Las cuentas bancarias son utilizadas para registrar cobros mediante transferencia o cheque.
+
+| URL                                                     | Método |
+|---------------------------------------------------------|--------|
+| `https://app.conpronto.com/api/v1/bank_accounts/`       | GET    |
+| `https://app.conpronto.com/api/v1/bank_accounts/<ID>/`  | GET    |
+| `https://app.conpronto.com/api/v1/bank_accounts/`       | POST   |
+| `https://app.conpronto.com/api/v1/bank_accounts/<ID>/`  | PUT    |
+| `https://app.conpronto.com/api/v1/bank_accounts/<ID>/`  | DELETE |
+
 ### Url's de link de pago
 
 | URL                                   | Método |

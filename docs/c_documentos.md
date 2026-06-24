@@ -16,7 +16,15 @@
   "tipo_documento": "FAC",
   "estado": 1,
   "informacion": "Documento creado via API",
-  "cobros": []
+  "cobros": [
+    {
+      "fecha_emision": "2026-03-10 10:00:00",
+      "metodo_pago": "TRA",
+      "numero_comprobante": "TRX-001245",
+      "id_cuenta_bancaria": 1273,
+      "valor": 1.15
+    }
+  ]
 }
 ```
 
@@ -39,6 +47,33 @@ Internamente, Pronto mapea el valor de `tipo_documento` a un código numérico. 
 | `FAC`            |
 | `DNA`            |
 | `EXP`            |
+
+### Métodos de pago (`metodo_pago`)
+
+El campo `metodo_pago` identifica la forma en la que se registra el cobro del documento.
+
+| metodo_pago |
+|-------------|
+| EF          |
+| TRA         |
+| TC          |
+| CHQ         |
+
+### Validación para Transferencias y Cheques
+
+Cuando el método de pago sea:
+
+- `TRA` (Transferencia)
+- `CHQ` (Cheque)
+
+Los siguientes campos son obligatorios:
+
+| Parámetro              | Tipo    | Descripción |
+|------------------------|---------|-------------|
+| `numero_comprobante`   | string  | Número de comprobante, referencia bancaria o número de cheque |
+| `id_cuenta_bancaria`   | integer | Identificador de la cuenta bancaria donde se recibe el pago |
+
+Si no se envían estos campos, el cobro será rechazado.
 
 ### Atributos del objeto Documento
 
@@ -161,6 +196,11 @@ Content-Type: application/json
 - `id_cliente` debe existir y pertenecer al partner autenticado.
 - Se recomienda inicializar `saldo` con el valor pendiente del documento (por ejemplo, `valor_neto + valor_imp`).
 - `cobros` normalmente se envía como `[]` u omitir; los pagos se gestionan en el módulo de [Pagos](d_cobros.md).
+- Para cobros con método `TRA` o `CHQ`:
+  - `numero_comprobante` es obligatorio.
+  - `id_cuenta_bancaria` es obligatorio.
+  - La cuenta bancaria debe existir y pertenecer al partner autenticado.
+- Los demás métodos de pago no requieren información bancaria.
 
 ### Respuesta
 
