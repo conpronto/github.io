@@ -1,0 +1,5 @@
+  [data-md-color-scheme="primary"] {
+    --md-primary-fg-color:        #FB29FB;
+    --md-primary-fg-color--light: #FFFFFF;
+    --md-primary-fg-color--dark:  #2E303E;
+  }
