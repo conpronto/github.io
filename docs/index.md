@@ -138,3 +138,12 @@ Las cuentas bancarias son utilizadas para registrar cobros mediante transferenci
 | URL                                   | Método |
 |---------------------------------------|--------|
 | `https://app.conpronto.com/api/v1/paylinks/` | POST   |
+
+### URLs de registros y pagos recurrentes
+
+| URL                                                        | Método | Uso                                                                               |
+|------------------------------------------------------------|--------|-----------------------------------------------------------------------------------|
+| `https://app.conpronto.com/api/v1/recurrent/`              | GET    | Consulta las tarjetas registradas y sus pagos recurrentes mediante `customer_id`. |
+| `https://app.conpronto.com/api/v1/recurrent/<ID>/`         | GET    | Consulta un registro específico de tarjeta y sus pagos recurrentes asociados.     |
+| `https://app.conpronto.com/api/v1/recurrent/`              | POST   | Genera el enlace público para registrar la tarjeta de un cliente.                 |
+
