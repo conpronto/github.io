@@ -7,7 +7,7 @@ Permite generar un enlace público para que un cliente registre su tarjeta y con
 - Autenticación JWT mediante Bearer Token.
 - Cliente existente en Pronto.
 - El cliente debe pertenecer al partner autenticado.
-- El partner debe tener habilitados los débitos recurrentes en Datafast.
+- El partner debe tener habilitados los débitos recurrentes en la Pasarela configurada.
 
 ---
 
@@ -180,9 +180,9 @@ curl --location '{{base_url}}/api/v1/recurrent/10/' \
 
 ### Parámetros de ruta
 
-| Parámetro | Tipo    | Obligatorio | Descripción                              |
-|-----------|---------|-------------|------------------------------------------|
-| `id`      | integer | Sí          | ID del registro en `CustomerDatafastCard`. |
+| Parámetro | Tipo    | Obligatorio | Descripción                             |
+|-----------|---------|-------------|-----------------------------------------|
+| `id`      | integer | Sí          | ID del registro. |
 
 La respuesta tiene la misma estructura del objeto incluido en `results` de la consulta por cliente, pero devuelve un único registro.
 
@@ -198,18 +198,16 @@ Si el registro no existe o pertenece a otro partner:
 
 ## Pagos recurrentes
 
-Cada elemento de `pagos` corresponde a un registro de `DatafastRecurrentPayment`.
-
-| Campo              | Tipo          | Descripción                                   |
-|--------------------|---------------|-----------------------------------------------|
-| `id`               | integer       | Identificador del cobro.                      |
-| `cycle_number`     | integer       | Número de cuota o ciclo.                      |
-| `scheduled_date`   | date/null     | Fecha programada para el cobro.               |
-| `fecha_pago`       | datetime/null | Fecha y hora de procesamiento.                |
-| `monto`            | decimal       | Monto cobrado.                                |
-| `estado`           | string        | Estado general del cobro.                     |
-| `referencia`       | string/null   | Referencia devuelta por Datafast.             |
-| `error_message`    | string        | Mensaje de error, si el cobro falló.          |
+| Campo              | Tipo          | Descripción                          |
+|--------------------|---------------|--------------------------------------|
+| `id`               | integer       | Identificador del cobro.             |
+| `cycle_number`     | integer       | Número de cuota o ciclo.             |
+| `scheduled_date`   | date/null     | Fecha programada para el cobro.      |
+| `fecha_pago`       | datetime/null | Fecha y hora de procesamiento.       |
+| `monto`            | decimal       | Monto cobrado.                       |
+| `estado`           | string        | Estado general del cobro.            |
+| `referencia`       | string/null   | Referencia devuelta por la Pasarela. |
+| `error_message`    | string        | Mensaje de error, si el cobro falló. |
 
 ### Estados de los pagos recurrentes
 
